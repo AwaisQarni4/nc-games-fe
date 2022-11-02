@@ -8,6 +8,7 @@ const ReviewOfCategory = () => {
   const [isLodaing, setIsLoading] = useState(true);
 
   const categoryToFind = useParams().reviews;
+
   useEffect(() => {
     setIsLoading(true);
     fetch(
