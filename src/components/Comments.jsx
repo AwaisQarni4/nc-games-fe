@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ShowComments from "./ShowComments";
 
 const Comments = () => {
@@ -32,6 +33,12 @@ const Comments = () => {
           return <ShowComments key={comment.comment_id} comment={comment} />;
         })}
       </ul>
+      <Link to={`/`}>
+        <button>Home</button>
+      </Link>
+      <Link to={`/reviews/${reviewId}`}>
+        <button>Back</button>
+      </Link>
     </div>
   );
 };
