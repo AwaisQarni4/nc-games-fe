@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Categories from "./components/Categories";
 import ReviewOfCategory from "./components/ReviewOfCategory";
 import IndividualReview from "./components/IndividualReview";
+import Comments from "./components/Comments";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
           <Route
             path="/category/:reviews"
             element={<ReviewOfCategory />}
+          ></Route>
+          <Route
+            path="/reviews/:review_id/comments"
+            element={<Comments />}
           ></Route>
         </Routes>
       </div>

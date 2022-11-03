@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const IndividualReview = () => {
@@ -66,6 +67,9 @@ const IndividualReview = () => {
       <h3>Designer: {individualReview.designer}</h3>
       <h4>author: {individualReview.owner}</h4>
       <h4>Comments: {individualReview.comment_count}</h4>
+      <Link to={`/reviews/${reviewId}/comments`}>
+        <button>See Comment</button>
+      </Link>
       <h4>votes: {individualReview.votes + voteUp}</h4>
       <button onClick={handleUpVotes}> Up Vote</button>
       <button onClick={handleDownVotes}> Down Vote</button>
