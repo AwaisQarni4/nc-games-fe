@@ -4,9 +4,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import ShowComments from "./ShowComments";
 
-const Comments = () => {
+const Comments = ({ user }) => {
   const [comments, setComments] = useState(null);
   const [isLodaing, setIsLoading] = useState(true);
+  // const [ourUser, setOurUser] = useState(null);
+
+  // const setUser = () => {
+  //   return setOurUser(user);
+  // };
+
+  // setUser();
 
   const reviewId = useParams().review_id;
 
@@ -26,24 +33,30 @@ const Comments = () => {
 
   const handleComment = (event) => {
     event.preventDefault();
-    console.log("username", event.target[1].value);
     console.log("comment", event.target[0].value);
+    console.log(user);
     fetch(
       `https://awais-game-data.herokuapp.com/api/reviews/${reviewId}/comments`,
       {
         method: "POST",
         body: JSON.stringify({
-          username: event.target[1].value,
+          username: user,
           body: event.target[0].value,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       }
-    ).then((res) => {
-      console.log(res.json());
-      return res.json();
-    });
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+        setComments((currentComments) => {
+          return [...currentComments, result];
+        });
+      });
   };
 
   if (isLodaing) return <h2>Fetching Comments... Think Yours!!</h2>;
@@ -64,15 +77,9 @@ const Comments = () => {
       <br />
       <br />
       <form onSubmit={handleComment}>
-        <label>Comment</label>
+        <label>Fancy a Comment? {user}</label>
         <br />
         <input type="text" name="comment" placeholder="Comment"></input>
-        <br />
-        <label>Username</label>
-        <br />
-        <input type="text" name="username" placeholder="Username"></input>
-        <br />
-        <br />
         <button type="submit">submit</button>
       </form>
     </div>
